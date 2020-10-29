@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <a href="{% url 'create_video_chat_room' %}">Create video chat group/room</a>
+    <div>
+        <p>Existing video chat rooms</p>
+        {% for e in opentok_sessions %}
+            <a href="{% url 'video_chat_room' room_id=e.id %}">room - {{e.id}}</a>
+            <br>
+        {% endfor %}
+    </div>
+</body>
+</html>
