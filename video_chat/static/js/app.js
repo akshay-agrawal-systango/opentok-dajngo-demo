@@ -10,6 +10,8 @@ function handleError(error) {
   }
 }
 
+user_count_elmnt = document.getElementById("user_count");
+
 function initializeSession() {
   var session = OT.initSession(apiKey, sessionId);
 
@@ -42,6 +44,25 @@ function initializeSession() {
     } else {
       // If the connection is successful, publish the publisher to the session
       session.publish(publisher, handleError);
+    }
+  });
+
+  var connectionCount = parseInt(user_count_elmnt.innerHTML);
+  session.on({
+    connectionCreated: function (event) {
+      connectionCount++;
+      if (event.connection.connectionId != session.connection.connectionId) {
+        console.log('Another client connected. ' + connectionCount + ' total.');
+        user_count_elmnt.innerHTML = connectionCount;
+      }
+      if (event.connection.connectionId == session.connection.connectionId) {
+        user_count_elmnt.innerHTML = connectionCount;
+      }
+    },
+    connectionDestroyed: function connectionDestroyedHandler(event) {
+      connectionCount--;
+      console.log('A client disconnected. ' + connectionCount + ' total.');
+      user_count_elmnt.innerHTML = connectionCount;
     }
   });
 }
