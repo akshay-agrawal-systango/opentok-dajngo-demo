@@ -18,7 +18,6 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 API_KEY = os.getenv("API_KEY")
 PEOJECT_SECRET = os.getenv("PEOJECT_SECRET")
-SESSION_ID = os.getenv("SESSION_ID")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,12 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=a06(=v2k*0px*t01_#m7m&c@jl)-8^b2i!((e-aj3x9%p5j2_'
+SECRET_KEY = os.getenv("SECRET_KEY", '=a06(=v2k*0px*t01_#m7m&c@jl)-8^b2i!((e-aj3x9%p5j2_')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -126,4 +125,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'

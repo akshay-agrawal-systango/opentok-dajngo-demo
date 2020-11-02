@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from opentok import OpenTok, MediaModes
 from django.conf import settings
-from .models import OpenTokSessions, OpenTokTokens
+from .models import OpenTokSessions
 
 def index(request):
     opentok_sessions = OpenTokSessions.objects.all()
